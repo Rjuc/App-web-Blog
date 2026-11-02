@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ e["titulo"] }}{% endblock %}
+
+{% block main %}
+    <article class="texto">
+        <h2>{{ e["titulo"] }}</h2>
+        <img src="{{ url_for('static', filename='img/' + e['imagen']) }}" class="img-fluid" alt="{{ e['titulo'] }}">
+        {% for parrafo in e["texto"] %}
+        <p>{{ parrafo }}</p>
+        {% endfor %}
+        {% if e.get("certificado") %}
+        <p><a href="{{ e['certificado'] }}" target="_blank" rel="noopener noreferrer">Ver certificado de CS50x</a></p>
+        {% endif %}
+        <button id="like" data-entrada="{{ e['id'] }}" aria-pressed="false" class="btn btn-outline-dark">Me gusta (<span id="contador">0</span>)</button>
+        <a href="{{ url_for('index') }}" class="btn btn-info">Volver al inicio</a>
+    </article>
+{% endblock %}
